@@ -7,18 +7,19 @@ router.get('/', (req, res) => {
 	// find all categories
 	// be sure to include its associated Products
 	Category.findAll({
-		include: [Product]
-	});
+		include: Product
+	}).then(data => res.send(data));
 });
 
 router.get('/:id', (req, res) => {
-	const { propertyName } = objectToDestruct;
+	const { id } = req.params;
 
 	// find one category by its `id` value
 	// be sure to include its associated Products
 	Category.findOne({
-		where: { id }
-	});
+		where: { id },
+		include: Product
+	}).then(data => res.send(data));
 });
 
 router.post('/', (req, res) => {
